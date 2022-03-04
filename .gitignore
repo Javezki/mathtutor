@@ -1,5 +1,5 @@
 target/
 .vscode/
 *.class
-main/test/
+src/main/test/
 src/main/java/rocks/javezki/GetKeys.java
