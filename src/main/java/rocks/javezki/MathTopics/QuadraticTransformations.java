@@ -28,17 +28,20 @@ public class QuadraticTransformations extends MathTopics {
 
     public QuadraticTransformations() {
         super("Quadratic Transformations", "Practice for quadratic transformations");
-        waiter = MathMain.getWaiter();
-        event = Start.getCommandEvent();
     }
 
     @Override
     public void run() {
+        waiter = MathMain.getWaiter();
+        event = Start.getCommandEvent();
+
         event.reply("Starting: Quadratic Transformations");
 
         type = new Random().nextInt(0, 4);
 
         setType(type);
+
+        event.reply("The type: " + type);
 
         if (type == 0) straightLine();
 
@@ -46,7 +49,9 @@ public class QuadraticTransformations extends MathTopics {
 
         else if (type == 2) radical();
 
-        else if (type == 4) absolute();;
+        else if (type == 3) reciprocal();
+
+        else if (type == 4) absolute();
     }
 
     /**

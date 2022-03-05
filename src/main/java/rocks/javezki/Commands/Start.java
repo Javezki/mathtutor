@@ -34,17 +34,19 @@ public class Start extends Command {
                     String rawMessage = e.getMessage().getContentRaw().toLowerCase();
 
                     try {
-                        int choice = Integer.parseInt(rawMessage);
-                        Topics.getMathtopics().get(choice).run();
-                    } catch (NumberFormatException ex) {}
-                        for (MathTopics topic : Topics.getMathtopics())
-                        {
-                            if (rawMessage.equals(topic.getTitle()))
-                            {
-                                topic.run();
-                                return;
-                            }
+                        Topics.getMathtopics().get(Integer.parseInt(rawMessage) - 1).run();
+                    } catch (NumberFormatException ex) {
+                        event.reply("Please list the number or the name of the topic!");
+                    } catch (IndexOutOfBoundsException ex) {
+                        event.reply("Not a valid option!");
+                    }
+
+                    for (MathTopics topic : Topics.getMathtopics()) {
+                        if (rawMessage.equals(topic.getTitle())) {
+                            topic.run();
+                            return;
                         }
+                    }
                 });
     }
 
