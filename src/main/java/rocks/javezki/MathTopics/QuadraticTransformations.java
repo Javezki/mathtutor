@@ -32,6 +32,7 @@ public class QuadraticTransformations extends MathTopics {
 
     @Override
     public void run() {
+        
         waiter = MathMain.getWaiter();
         event = Start.getCommandEvent();
 
@@ -40,8 +41,6 @@ public class QuadraticTransformations extends MathTopics {
         type = new Random().nextInt(0, 4);
 
         setType(type);
-
-        event.reply("The type: " + type);
 
         if (type == 0) straightLine();
 
