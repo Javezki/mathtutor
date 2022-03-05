@@ -2,4 +2,4 @@ target/
 .vscode/
 *.class
 src/test/*
-src/main/java/rocks/javezki/GetKeys.java
+src/main/java/rocks/javezki/DiscordKeys.java
