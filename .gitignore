@@ -2,4 +2,4 @@ target/
 .vscode/
 *.class
 src/test/*
-src/main/java/studio/javezki/MathTopics/DiscordKeys.java
+src/main/java/studio/javezki/DiscordKeys.java
