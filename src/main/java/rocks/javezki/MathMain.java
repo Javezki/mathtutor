@@ -40,7 +40,7 @@ public class MathMain
 
         builder.setStatus(OnlineStatus.ONLINE);
 
-        builder.setActivity(Activity.listening("to students cries for help"));
+        builder.setActivity(Activity.listening("students cries for help"));
 
         try {
             JDABuilder.createLight(DiscordKeys.getMathToken())

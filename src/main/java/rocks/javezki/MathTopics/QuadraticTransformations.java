@@ -32,7 +32,7 @@ public class QuadraticTransformations extends MathTopics {
 
     @Override
     public void run() {
-        
+
         waiter = MathMain.getWaiter();
         event = Start.getCommandEvent();
 
@@ -41,6 +41,8 @@ public class QuadraticTransformations extends MathTopics {
         type = new Random().nextInt(0, 4);
 
         setType(type);
+
+        generateNumbers();
 
         if (type == 0) straightLine();
 
@@ -71,54 +73,11 @@ public class QuadraticTransformations extends MathTopics {
         horDisplacement = rand.nextInt(-20, 20);
     }
 
-    public static void setType(int type) {
+    private static void setType(int type) {
         QuadraticTransformations.type = type;
     }
 
-    /**
-     * 
-     * @return 0 - Straight Line | 1 - Parabola | 2 - Radical | 3 - Reciprocal | 4 -
-     *         Absolute
-     * 
-     */
-    public static int getType() {
-        return type;
-    }
-
-    /**
-     * 
-     * @return Get Vertical Stretch of generated numbers
-     */
-    public static int getVertStretch() {
-        return vertStretch;
-    }
-
-    /**
-     * 
-     * @return Get Horizontal Stretch of generated numbers
-     */
-    public static int getHorStretch() {
-        return horStretch;
-    }
-
-    /**
-     * 
-     * @return Get Vertical Displacement of generated numbers
-     */
-    public static int getVertDisplacement() {
-        return vertDisplacement;
-    }
-
-    /**
-     * 
-     * @return Get Horizontal Displacement of generated numbers
-     */
-    public static int getHorDisplacement() {
-        return horDisplacement;
-    }
-
-    public void absolute() {
-        generateNumbers();
+    private void absolute() {
 
         event.reply("The equation: \n \n " + vertStretch + "(" + horStretch + "(|x| + " + vertDisplacement + ")) + "
                 + horDisplacement);
@@ -126,16 +85,14 @@ public class QuadraticTransformations extends MathTopics {
         startTransformations();
     }
 
-    public void reciprocal() {
-        generateNumbers();
+    private void reciprocal() {
 
         event.reply("The equation: \n \n" + vertStretch + "(1/x + " + vertDisplacement + ") + " + horDisplacement);
 
         startTransformations();
     }
 
-    public void radical() {
-        generateNumbers();
+    private void radical() {
 
         event.reply("The equation: \n \n " + vertStretch + "(" + horStretch + "(√x + " + vertDisplacement + ")) + "
                 + horDisplacement);
@@ -143,8 +100,7 @@ public class QuadraticTransformations extends MathTopics {
         startTransformations();
     }
 
-    public void parabola() {
-        generateNumbers();
+    private void parabola() {
 
         event.reply("The equation: \n \n" + vertStretch + "(" + horStretch + "(x + " + vertDisplacement + "))² + "
                 + horDisplacement);
@@ -152,8 +108,7 @@ public class QuadraticTransformations extends MathTopics {
         startTransformations();
     }
 
-    public void straightLine() {
-        generateNumbers();
+    private void straightLine() {
 
         event.reply("The equation: \n \n" + vertStretch + "(x + " + vertDisplacement + ") + " + horDisplacement);
 
