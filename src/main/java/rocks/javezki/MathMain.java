@@ -44,7 +44,7 @@ public class MathMain
         builder.setActivity(Activity.listening("students cries for help"));
 
         try {
-            JDABuilder.createLight(DiscordKeys.getTestToken())
+            JDABuilder.createLight(DiscordKeys.getMathToken())
             .addEventListeners(waiter, builder.build(), new OnHelp())
             .build();
         } catch (LoginException e) {
