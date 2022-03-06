@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import rocks.javezki.MathMain;
 import rocks.javezki.Commands.Start;
@@ -36,23 +37,73 @@ public class QuadraticTransformations extends MathTopics {
         waiter = MathMain.getWaiter();
         event = Start.getCommandEvent();
 
-        event.reply("Starting: Quadratic Transformations");
-
         type = new Random().nextInt(0, 4);
 
         setType(type);
 
         generateNumbers();
 
-        if (type == 0) straightLine();
+        if (type == 0)
+            straightLine();
 
-        if (type == 1) parabola();
+        if (type == 1)
+            parabola();
 
-        else if (type == 2) radical();
+        else if (type == 2)
+            radical();
 
-        else if (type == 3) reciprocal();
+        else if (type == 3)
+            reciprocal();
 
-        else if (type == 4) absolute();
+        else if (type == 4)
+            absolute();
+
+        startTransformations();
+    }
+
+    @Override
+    public void help() {
+        
+        EmbedBuilder builder = new EmbedBuilder();
+
+        builder.setTitle("All you need to know about transformations");
+        builder.setDescription("__**a[k(x - d)] + c**__");
+
+        builder.addBlankField(false);
+
+        String vertStretchDescription = "The vertical stretch is how much f(x) is being multiplied vertically" +
+        " and is usually represented as the a in the main transformation formula.";
+
+        builder.addField("The Vertical Stretch", vertStretchDescription, false);
+
+        builder.addBlankField(false);
+        
+        String horStretchDescription = "The horizontal stretch is how much f(x) is being multipled horizontally" +
+        " and is usually represented as the k in the main transformation formula." + 
+        " I'm going to be honest, I'm not really sure how this one works";
+
+        builder.addField("The Horizontal Stretch", horStretchDescription, false);
+        
+        builder.addBlankField(false);
+
+        String vertDisplacementDescription = "The vertical displacement is how much f(x) is shifted on the x-axis." +
+        " The direction is determined by the sign (+ = to the left, - = to the right). " +
+        "Be sure to remember how the direction is the opposite to the sign on the number line.";
+
+        builder.addField("The Vertical Displacement", vertDisplacementDescription, false);
+        
+        builder.addBlankField(false);
+
+        String horDisplacementDescription = "The horizontal displacement is how much f(x) is shifted on the y-axes." +
+        " The direction is determined by the sign (+ = shifted upwards, - = shifted downwards)." +
+        " The signs are not swapped in this instance.";
+
+        builder.addField("The Horizontal Displacement", horDisplacementDescription, false);
+
+        builder.setThumbnail("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdqy3bxISAYtfHg9lWKo3gyKLTeyAfRS-T4A&usqp=CAU");
+
+        event.getChannel().sendMessageEmbeds(builder.build()).queue();
+
     }
 
     /**
@@ -79,40 +130,31 @@ public class QuadraticTransformations extends MathTopics {
 
     private void absolute() {
 
-        event.reply("The equation: \n \n " + vertStretch + "(" + horStretch + "(|x| + " + vertDisplacement + ")) + "
-                + horDisplacement);
-
-        startTransformations();
+        event.reply("`The equation: \n \n " + vertStretch + "(" + horStretch + "(|x| + " + vertDisplacement + ")) + "
+                + horDisplacement + "`");
     }
 
     private void reciprocal() {
 
-        event.reply("The equation: \n \n" + vertStretch + "(1/x + " + vertDisplacement + ") + " + horDisplacement);
-
-        startTransformations();
+        event.reply(
+                "`The equation: \n \n" + vertStretch + "(1/x + " + vertDisplacement + ") + " + horDisplacement + "`");
     }
 
     private void radical() {
 
-        event.reply("The equation: \n \n " + vertStretch + "(" + horStretch + "(√x + " + vertDisplacement + ")) + "
-                + horDisplacement);
-
-        startTransformations();
+        event.reply("`The equation: \n \n " + vertStretch + "(" + horStretch + "(√x + " + vertDisplacement + ")) + "
+                + horDisplacement + "`");
     }
 
     private void parabola() {
 
-        event.reply("The equation: \n \n" + vertStretch + "(" + horStretch + "(x + " + vertDisplacement + "))² + "
-                + horDisplacement);
-
-        startTransformations();
+        event.reply("`The equation: \n \n" + vertStretch + "(" + horStretch + "(x + " + vertDisplacement + "))² + "
+                + horDisplacement + "`");
     }
 
     private void straightLine() {
 
-        event.reply("The equation: \n \n" + vertStretch + "(x + " + vertDisplacement + ") + " + horDisplacement);
-
-        startTransformations();
+        event.reply("`The equation: \n \n" + vertStretch + "(x + " + vertDisplacement + ") + " + horDisplacement + "`");
     }
 
     private void horStretch() {
@@ -133,7 +175,10 @@ public class QuadraticTransformations extends MathTopics {
                 && !e.getMessage().equals(event.getMessage()), e -> {
                     if (e.getMessage().getContentRaw().equals(Integer.toString(horStretch)))
                         event.reply("Correct!");
-                    else
+                    else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
+                        event.reply("Stopping!");
+                        return;
+                    } else
                         event.reply("Incorrect! The answer is: " + horStretch);
                     vertDisplacement();
                 }, 1, TimeUnit.MINUTES, () -> event.reply("You took too long!"));
@@ -149,7 +194,10 @@ public class QuadraticTransformations extends MathTopics {
                 && !e.getMessage().equals(event.getMessage()), e -> {
                     if (e.getMessage().getContentRaw().equals(Integer.toString(vertDisplacement)))
                         event.reply("Correct!");
-                    else
+                    else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
+                        event.reply("Stopping!");
+                        return;
+                    } else
                         event.reply("Incorrect! The answer is: " + vertDisplacement);
 
                     horDisplacement();
@@ -164,7 +212,10 @@ public class QuadraticTransformations extends MathTopics {
                 && !e.getMessage().equals(event.getMessage()), e -> {
                     if (e.getMessage().getContentRaw().equals(Integer.toString(horDisplacement)))
                         event.reply("Correct!");
-                    else
+                    else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
+                        event.reply("Stopping!");
+                        return;
+                    } else
                         event.reply("Incorrect! The answer is: " + horDisplacement);
                     event.reply("Good job you did idk lololol");
                 }, 1, TimeUnit.MINUTES, () -> event.reply("Sorry you took too long!"));
@@ -178,7 +229,10 @@ public class QuadraticTransformations extends MathTopics {
                 && !e.getMessage().equals(event.getMessage()), e -> {
                     if (e.getMessage().getContentRaw().equals(Integer.toString(vertStretch)))
                         event.reply("Correct!");
-                    else
+                    else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
+                        event.reply("Stopping!");
+                        return;
+                    } else
                         event.reply("Incorrect! The answer is: " + vertStretch);
                     horStretch();
                 }, 1, TimeUnit.MINUTES, () -> event.reply("Sorry you took too long!"));
@@ -193,7 +247,10 @@ public class QuadraticTransformations extends MathTopics {
                 && !e.getMessage().equals(event.getMessage()), e -> {
                     if (e.getMessage().getContentRaw().equalsIgnoreCase(getStringType()))
                         event.reply("Correct!");
-                    else
+                    else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
+                        event.reply("Stopping!");
+                        return;
+                    } else
                         event.reply("Wrong! The answer is: " + getStringType());
                     vertStretch();
                 }, 1, TimeUnit.MINUTES, () -> event.reply("Sorry you took too long!"));
@@ -213,5 +270,4 @@ public class QuadraticTransformations extends MathTopics {
 
         return null;
     }
-
 }

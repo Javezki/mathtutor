@@ -1,7 +1,10 @@
 package rocks.javezki.MathTopics;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.dv8tion.jda.api.EmbedBuilder;
 
 public class Topics {
 
@@ -25,18 +28,28 @@ public class Topics {
 
     /**
      * 
-     * @return A string that displays all math topics
+     * @return An embed that displays all math topics in an embed form
      */
-    public static String displayMathtopics()
+    public static EmbedBuilder displayMathtopics()
     {
-        String display = "";
+        
+        EmbedBuilder builder = new EmbedBuilder();
         int count = 1;
+
+        builder.setTitle("Math Topics: ");
+
+        builder.setColor(Color.RED);
+
+        builder.setDescription("The current list of Math Topics:");
+
+        builder.setThumbnail("https://i.imgflip.com/3njb30.jpg");
+
         for (MathTopics topic : mathTopics)
         {
-            display += count + ". " + topic.getTitle() + "\n" + topic.getDescription() + "\n";
+            builder.addField(count + ". " + topic.getTitle(), "\n \n \n" + topic.getDescription(), false);
             count++;
         }
 
-        return display;
+        return builder;
     }
 }

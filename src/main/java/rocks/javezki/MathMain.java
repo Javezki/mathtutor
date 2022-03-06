@@ -32,6 +32,7 @@ public class MathMain
         CommandClientBuilder builder = new CommandClientBuilder();
 
         builder.setPrefix(">");
+
         builder.setAlternativePrefix("+");
 
         builder.setOwnerId("295280700368617473");
@@ -43,11 +44,11 @@ public class MathMain
         builder.setActivity(Activity.listening("students cries for help"));
 
         try {
-            JDABuilder.createLight(DiscordKeys.getMathToken())
-            .addEventListeners(waiter, builder.build())
+            JDABuilder.createLight(DiscordKeys.getTestToken())
+            .addEventListeners(waiter, builder.build(), new OnHelp())
             .build();
         } catch (LoginException e) {
-            System.out.println("\u001B[35m" + "Error logging into bot! (Did you use the correct keys?)");
+            System.out.println("\u001B[35m" + "Error logging into bot! (Did you use the correct keys?)" + "\u001B[0m");
         }
     }
 

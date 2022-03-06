@@ -24,6 +24,11 @@ public abstract class MathTopics {
     }
 
     public abstract void run();
+
+    /**
+     * @apiNote What to display when users click on the help emote
+     */
+    public abstract void help();
     
 
     public String getTitle()
