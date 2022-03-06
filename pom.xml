@@ -48,6 +48,7 @@
       <groupId>net.dv8tion</groupId>
       <artifactId>JDA</artifactId>
       <version>4.4.0_350</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 
@@ -76,6 +77,20 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <index>true</index>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <classpathPrefix>lib</classpathPrefix>
+                <mainClass>studio.javezki.MathMain</mainClass>
+              </manifest>
+              <manifestEntries>
+                <mode>development</mode>
+                <key>value</key>
+              </manifestEntries>
+            </archive>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -96,5 +111,33 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.3.1-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <relocations>
+                <!-- relocated due to dependency hell between Spigot and JDA -->
+                <relocation>
+                  <pattern>org.apache.commons</pattern>
+                  <shadedPattern>com.github.javezki.JDADependencies</shadedPattern>
+                </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <!--  utterly useless artifact from shade 2.x  -->
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
