@@ -1,4 +1,4 @@
-package rocks.javezki;
+package studio.javezki;
 
 import javax.security.auth.login.LoginException;
 
@@ -9,9 +9,9 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import rocks.javezki.Commands.Start;
-import rocks.javezki.MathTopics.QuadraticTransformations;
-import rocks.javezki.MathTopics.Topics;
+import studio.javezki.Commands.Start;
+import studio.javezki.MathTopics.QuadraticTransformations;
+import studio.javezki.MathTopics.Topics;
 
 /**
  * Hello world!

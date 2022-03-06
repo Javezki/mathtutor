@@ -1,8 +1,8 @@
-package rocks.javezki;
+package studio.javezki;
 
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import rocks.javezki.Commands.Start;
+import studio.javezki.Commands.Start;
 
 public class OnHelp extends ListenerAdapter{
     

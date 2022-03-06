@@ -1,4 +1,4 @@
-package rocks.javezki.Commands;
+package studio.javezki.Commands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import rocks.javezki.MathTopics.MathTopics;
-import rocks.javezki.MathTopics.Topics;
+import studio.javezki.MathTopics.MathTopics;
+import studio.javezki.MathTopics.Topics;
 
 public class Start extends Command {
 

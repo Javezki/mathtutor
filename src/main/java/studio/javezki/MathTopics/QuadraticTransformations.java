@@ -1,4 +1,4 @@
-package rocks.javezki.MathTopics;
+package studio.javezki.MathTopics;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -8,8 +8,8 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import rocks.javezki.MathMain;
-import rocks.javezki.Commands.Start;
+import studio.javezki.MathMain;
+import studio.javezki.Commands.Start;
 
 public class QuadraticTransformations extends MathTopics {
 

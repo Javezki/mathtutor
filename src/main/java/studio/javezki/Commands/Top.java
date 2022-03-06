@@ -1,4 +1,4 @@
-package rocks.javezki.Commands;
+package studio.javezki.Commands;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;

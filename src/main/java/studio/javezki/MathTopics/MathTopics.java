@@ -1,4 +1,4 @@
-package rocks.javezki.MathTopics;
+package studio.javezki.MathTopics;
 
 
 
