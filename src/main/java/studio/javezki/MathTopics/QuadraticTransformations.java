@@ -1,6 +1,5 @@
 package studio.javezki.MathTopics;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import com.jagrosh.jdautilities.command.CommandEvent;
@@ -37,7 +36,8 @@ public class QuadraticTransformations extends MathTopics {
         waiter = MathMain.getWaiter();
         event = Start.getCommandEvent();
 
-        type = new Random().nextInt(0, 4);
+        java.util.Random rand = new java.util.Random();
+        type = rand.nextInt(4);
 
         setType(type);
 
@@ -111,17 +111,17 @@ public class QuadraticTransformations extends MathTopics {
      */
 
     private void generateNumbers() {
-        Random rand = new Random();
+        java.util.Random rand = new java.util.Random();
 
         while (vertStretch == 0)
-            vertStretch = rand.nextInt(-20, 20);
+            vertStretch = rand.nextInt(40) - 20;
 
         while (horStretch == 0)
-            horStretch = rand.nextInt(-20, 20);
+            horStretch = rand.nextInt(40) - 20;
 
-        vertDisplacement = rand.nextInt(-20, 20);
+        vertDisplacement = rand.nextInt(40) - 20;
 
-        horDisplacement = rand.nextInt(-20, 20);
+        horDisplacement = rand.nextInt(40) - 20;
     }
 
     private static void setType(int type) {
