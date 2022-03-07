@@ -26,6 +26,12 @@ public class QuadraticTransformations extends MathTopics {
 
     private static CommandEvent event;
 
+    private boolean xFlip = false;
+
+    private boolean yFlip;
+
+    private int count = 0;
+
     public QuadraticTransformations() {
         super("Quadratic Transformations", "Practice for quadratic transformations");
     }
@@ -116,8 +122,11 @@ public class QuadraticTransformations extends MathTopics {
         while (vertStretch == 0)
             vertStretch = rand.nextInt(40) - 20;
 
+        if (vertStretch < 0) xFlip = true;
+
         while (horStretch == 0)
             horStretch = rand.nextInt(40) - 20;
+        if (horStretch < 0) yFlip = true;
 
         vertDisplacement = rand.nextInt(40) - 20;
 
@@ -158,29 +167,23 @@ public class QuadraticTransformations extends MathTopics {
     }
 
     private void horStretch() {
-        if (type == 0) {
-            vertDisplacement();
-            return;
-        }
-
-        if (type == 3) {
-            vertDisplacement();
-            return;
-        }
 
         event.reply("What is the horizontal stretch of the equation?");
 
         waiter.waitForEvent(MessageReceivedEvent.class, e -> e.getAuthor().equals(event.getAuthor())
                 && e.getChannel().equals(event.getChannel())
                 && !e.getMessage().equals(event.getMessage()), e -> {
-                    if (e.getMessage().getContentRaw().equals(Integer.toString(horStretch)))
+                    if (e.getMessage().getContentRaw().equals("1/" + Integer.toString(horStretch)))
+                    {
+                        count++;
                         event.reply("Correct!");
+                    }
                     else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
                         event.reply("Stopping!");
                         return;
                     } else
-                        event.reply("Incorrect! The answer is: " + horStretch);
-                    vertDisplacement();
+                        event.reply("Incorrect! The answer is: " + "1/" + horStretch);
+                    xFlip();
                 }, 1, TimeUnit.MINUTES, () -> event.reply("You took too long!"));
     }
 
@@ -193,14 +196,16 @@ public class QuadraticTransformations extends MathTopics {
                 && e.getChannel().equals(event.getChannel())
                 && !e.getMessage().equals(event.getMessage()), e -> {
                     if (e.getMessage().getContentRaw().equals(Integer.toString(vertDisplacement)))
+                    {
+                        count++;
                         event.reply("Correct!");
+                    }
                     else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
                         event.reply("Stopping!");
                         return;
                     } else
                         event.reply("Incorrect! The answer is: " + vertDisplacement);
-
-                    horDisplacement();
+                    yFlip();
                 });
     }
 
@@ -217,7 +222,63 @@ public class QuadraticTransformations extends MathTopics {
                         return;
                     } else
                         event.reply("Incorrect! The answer is: " + horDisplacement);
-                    event.reply("Good job you did idk lololol");
+                    event.reply(count + "/7 correct ezzzz" );
+                    xFlip();
+                }, 1, TimeUnit.MINUTES, () -> event.reply("Sorry you took too long!"));
+    }
+
+    private void yFlip() {
+        event.reply("Is there a flip in the y-axis?");
+        waiter.waitForEvent(MessageReceivedEvent.class, e -> e.getAuthor().equals(event.getAuthor())
+                && e.getChannel().equals(event.getChannel())
+                && !e.getMessage().equals(event.getMessage()), e -> {
+                    if (yFlip)
+                    {
+                        if (e.getMessage().getContentRaw().equalsIgnoreCase("yes")) 
+                        {
+                            event.reply("Correct!");
+                            count++;
+                        }
+                        else event.reply("Incorrect!");
+                    }
+                    else
+                    {
+                        if (e.getMessage().getContentRaw().equalsIgnoreCase("no"))
+                        {
+                            event.reply("Correct");
+                            count++;
+                        }
+                        else event.reply("Incorrect");
+                    }
+
+                    horStretch();
+                }, 1, TimeUnit.MINUTES, () -> event.reply("Sorry you took too long!"));
+    }
+
+    private void xFlip() {
+        event.reply("Is there a flip in the y-axis?");
+        waiter.waitForEvent(MessageReceivedEvent.class, e -> e.getAuthor().equals(event.getAuthor())
+                && e.getChannel().equals(event.getChannel())
+                && !e.getMessage().equals(event.getMessage()), e -> {
+                    if (xFlip)
+                    {
+                        if (e.getMessage().getContentRaw().equalsIgnoreCase("yes")) 
+                        {
+                            event.reply("Correct!");
+                            count++;
+                        }
+                        else event.reply("Incorrect!");
+                    }
+                    else
+                    {
+                        if (e.getMessage().getContentRaw().equalsIgnoreCase("no"))
+                        {
+                            event.reply("Correct");
+                            count++;
+                        }
+                        else event.reply("Incorrect");
+                    }
+                    vertStretch();
                 }, 1, TimeUnit.MINUTES, () -> event.reply("Sorry you took too long!"));
     }
 
@@ -228,13 +289,16 @@ public class QuadraticTransformations extends MathTopics {
                 && e.getChannel().equals(event.getChannel())
                 && !e.getMessage().equals(event.getMessage()), e -> {
                     if (e.getMessage().getContentRaw().equals(Integer.toString(vertStretch)))
+                    {
+                        count++;
                         event.reply("Correct!");
+                    }
                     else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
                         event.reply("Stopping!");
                         return;
                     } else
                         event.reply("Incorrect! The answer is: " + vertStretch);
-                    horStretch();
+                    horDisplacement();
                 }, 1, TimeUnit.MINUTES, () -> event.reply("Sorry you took too long!"));
     }
 
@@ -246,13 +310,16 @@ public class QuadraticTransformations extends MathTopics {
                 && e.getChannel().equals(event.getChannel())
                 && !e.getMessage().equals(event.getMessage()), e -> {
                     if (e.getMessage().getContentRaw().equalsIgnoreCase(getStringType()))
+                    {
                         event.reply("Correct!");
+                        count++;
+                    }
                     else if (e.getMessage().getContentRaw().equalsIgnoreCase("stop")) {
                         event.reply("Stopping!");
                         return;
                     } else
                         event.reply("Wrong! The answer is: " + getStringType());
-                    vertStretch();
+                    vertDisplacement();
                 }, 1, TimeUnit.MINUTES, () -> event.reply("Sorry you took too long!"));
     }
 
