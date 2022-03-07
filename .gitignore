@@ -3,3 +3,4 @@ target/
 *.class
 src/test/*
 src/main/java/studio/javezki/DiscordKeys.java
+.editorconfig
