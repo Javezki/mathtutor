@@ -1,8 +1,11 @@
 package studio.javezki;
 
+import java.util.HashMap;
+
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import studio.javezki.Commands.Start;
+import studio.javezki.MathTopics.MathTopics;
 
 public class OnHelp extends ListenerAdapter{
     
@@ -10,15 +13,11 @@ public class OnHelp extends ListenerAdapter{
     public void onMessageReactionAdd(MessageReactionAddEvent ev)
     {
         if (ev.getUser().isBot()) return;
-        int instance = 0;
-        for (long helpID : Start.getHelpIDs())
-        {
-            if (ev.getMessageIdLong() == helpID)
-            {
-                Start.getCurrentTopic().help();
-                Start.removeHelpId(instance);
-            }
-            instance++;
-        }
+        
+        HashMap<Long, MathTopics> helpIds = Start.getHelpIDs();
+
+        if (!helpIds.containsKey(ev.getMessageIdLong())) return;
+
+        helpIds.get(ev.getMessageIdLong()).help();
     }
 }

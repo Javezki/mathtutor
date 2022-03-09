@@ -1,7 +1,6 @@
 package studio.javezki.Commands;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
@@ -19,7 +18,7 @@ public class Start extends Command {
 
     private static MathTopics currentTopic;
 
-    private static List<Long> helpIDs = new ArrayList<>();
+    private static HashMap<Long, MathTopics> helpIDs = new HashMap<Long, MathTopics>();
 
     public Start(EventWaiter waiter) {
         this.waiter = waiter;
@@ -43,7 +42,7 @@ public class Start extends Command {
                     for (MathTopics topic : Topics.getMathtopics()) {
                         if (rawMessage.equals(topic.getTitle())) {
                             event.reply("Starting: " + topic.getTitle());
-                            addReaction();
+                            addReaction(topic);
                             topic.run();
                             currentTopic = topic;
                             return;
@@ -52,7 +51,7 @@ public class Start extends Command {
 
                     try {
                         MathTopics topic = Topics.getMathtopics().get(Integer.parseInt(rawMessage) - 1);
-                        addReaction();
+                        addReaction(topic);
                         currentTopic = topic;
                         topic.run();
                     } catch (NumberFormatException ex) {
@@ -63,11 +62,11 @@ public class Start extends Command {
                 });
     }
 
-    private void addReaction() {
+    private void addReaction(MathTopics topic) {
 
         long messageId = commandEvent.getChannel().getLatestMessageIdLong();
 
-        helpIDs.add(messageId);
+        helpIDs.put(messageId, topic);
 
         commandEvent.getChannel().addReactionById(messageId, "U+2753").queue();
     }
@@ -80,13 +79,13 @@ public class Start extends Command {
         return currentTopic;
     }
 
-    public static List<Long> getHelpIDs() {
+    public static HashMap<Long, MathTopics> getHelpIDs() {
         return helpIDs;
     }
 
-    public static void removeHelpId(int instance)
-    {
-        helpIDs.remove(instance);
-    }
+    // public static void removeHelpId(int instance)
+    // {
+    // helpIDs.;
+    // }
 
 }

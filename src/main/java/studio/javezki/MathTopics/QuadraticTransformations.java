@@ -1,5 +1,6 @@
 package studio.javezki.MathTopics;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import com.jagrosh.jdautilities.command.CommandEvent;
@@ -42,8 +43,8 @@ public class QuadraticTransformations extends MathTopics {
         waiter = MathMain.getWaiter();
         event = Start.getCommandEvent();
 
-        java.util.Random rand = new java.util.Random();
-        type = rand.nextInt(4);
+        Random rand = new Random();
+        type = rand.nextInt(0, 4);
 
         setType(type);
 
@@ -117,20 +118,20 @@ public class QuadraticTransformations extends MathTopics {
      */
 
     private void generateNumbers() {
-        java.util.Random rand = new java.util.Random();
-
-        while (vertStretch == 0)
-            vertStretch = rand.nextInt(40) - 20;
+        
+        Random rand = new Random();
+        
+        vertStretch = rand.nextInt(-20, 20);
 
         if (vertStretch < 0) xFlip = true;
 
-        while (horStretch == 0)
-            horStretch = rand.nextInt(40) - 20;
+        horStretch = rand.nextInt(-20, 20);
+        
         if (horStretch < 0) yFlip = true;
 
-        vertDisplacement = rand.nextInt(40) - 20;
+        vertDisplacement = rand.nextInt(-20, 20) ;
 
-        horDisplacement = rand.nextInt(40) - 20;
+        horDisplacement = rand.nextInt(-20, 20);
     }
 
     private static void setType(int type) {
@@ -228,6 +229,7 @@ public class QuadraticTransformations extends MathTopics {
     }
 
     private void yFlip() {
+        if (type == 0) horStretch();
         event.reply("Is there a flip in the y-axis?");
         waiter.waitForEvent(MessageReceivedEvent.class, e -> e.getAuthor().equals(event.getAuthor())
                 && e.getChannel().equals(event.getChannel())
@@ -256,7 +258,7 @@ public class QuadraticTransformations extends MathTopics {
     }
 
     private void xFlip() {
-        event.reply("Is there a flip in the y-axis?");
+        event.reply("Is there a flip in the x-axis?");
         waiter.waitForEvent(MessageReceivedEvent.class, e -> e.getAuthor().equals(event.getAuthor())
                 && e.getChannel().equals(event.getChannel())
                 && !e.getMessage().equals(event.getMessage()), e -> {
