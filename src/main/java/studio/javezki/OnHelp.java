@@ -9,6 +9,9 @@ import studio.javezki.MathTopics.MathTopics;
 
 public class OnHelp extends ListenerAdapter{
     
+    /**
+     * @apiNote Checks if the id is one that the bot added and will display help
+     */
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent ev)
     {
@@ -19,5 +22,7 @@ public class OnHelp extends ListenerAdapter{
         if (!helpIds.containsKey(ev.getMessageIdLong())) return;
 
         helpIds.get(ev.getMessageIdLong()).help();
+
+        Start.removeHelpId(ev.getMessageIdLong());
     }
 }

@@ -34,7 +34,7 @@ public class QuadraticTransformations extends MathTopics {
     private int count = 0;
 
     public QuadraticTransformations() {
-        super("Quadratic Transformations", "Practice for quadratic transformations");
+        super("Quadratic Transformations", "Practice for quadratic transformations", "af[k(x - d)] + C");
     }
 
     @Override
@@ -101,7 +101,7 @@ public class QuadraticTransformations extends MathTopics {
         
         builder.addBlankField(false);
 
-        String horDisplacementDescription = "The horizontal displacement is how much f(x) is shifted on the y-axes." +
+        String horDisplacementDescription = "The horizontal displacement is how much f(x) is shifted on the y-axis." +
         " The direction is determined by the sign (+ = shifted upwards, - = shifted downwards)." +
         " The signs are not swapped in this instance.";
 

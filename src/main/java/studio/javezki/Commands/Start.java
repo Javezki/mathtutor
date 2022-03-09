@@ -83,9 +83,9 @@ public class Start extends Command {
         return helpIDs;
     }
 
-    // public static void removeHelpId(int instance)
-    // {
-    // helpIDs.;
-    // }
+    public static void removeHelpId(Long ID)
+    {
+    helpIDs.remove(ID);
+    }
 
 }

@@ -9,16 +9,18 @@ package studio.javezki.MathTopics;
 public abstract class MathTopics {
 
     private String title;
-    private String description;  
+    private String description;
+    private String formula;  
 
     /**
      * 
-     * @param waiter The event waiter initialized in main class so u can do fancy stuff
+     * @param 
      * @param title The title of the actual math topic (Optional)
      * @param description The description of the topic (Optional)
      */
-    public MathTopics(String title, String description) 
+    public MathTopics(String formula, String title, String description) 
     {
+        this.formula = formula;
         this.title = title;
         this.description = description; 
     }
@@ -39,5 +41,10 @@ public abstract class MathTopics {
     public String getDescription()
     {
         return description;
+    }
+
+    public String getFormula()
+    {
+        return formula;
     }
 }
