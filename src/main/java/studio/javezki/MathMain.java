@@ -9,8 +9,8 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import studio.javezki.Commands.Start;
-import studio.javezki.MathTopics.QuadraticTransformations;
-import studio.javezki.MathTopics.Topics;
+import studio.javezki.MathTopics.TopicLib;
+import studio.javezki.MathTopics.QuadraticTransformations.QuadraticTransformations;
 
 /**
  * Hello world!
@@ -20,7 +20,7 @@ public class MathMain {
     private static EventWaiter waiter;
 
     public static void main(String[] args) {
-        Topics.addMathTopic(
+        TopicLib.addMathTopic(
 
                 new QuadraticTransformations()
 

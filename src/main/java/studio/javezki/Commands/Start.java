@@ -8,7 +8,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import studio.javezki.MathTopics.MathTopics;
-import studio.javezki.MathTopics.Topics;
+import studio.javezki.MathTopics.TopicLib;
 
 public class Start extends Command {
 
@@ -31,7 +31,7 @@ public class Start extends Command {
         commandEvent = event;
 
         event.reply("Please select your topic:");
-        event.reply(Topics.displayMathtopics().build());
+        event.reply(TopicLib.displayMathtopics().build());
 
         waiter.waitForEvent(MessageReceivedEvent.class, e -> e.getAuthor().equals(event.getAuthor())
                 && e.getChannel().equals(event.getChannel())
@@ -39,7 +39,7 @@ public class Start extends Command {
                 e -> {
                     String rawMessage = e.getMessage().getContentRaw().toLowerCase();
 
-                    for (MathTopics topic : Topics.getMathtopics()) {
+                    for (MathTopics topic : TopicLib.getMathtopics()) {
                         if (rawMessage.equals(topic.getTitle())) {
                             event.reply("Starting: " + topic.getTitle());
                             addReaction(topic);
@@ -50,7 +50,7 @@ public class Start extends Command {
                     }
 
                     try {
-                        MathTopics topic = Topics.getMathtopics().get(Integer.parseInt(rawMessage) - 1);
+                        MathTopics topic = TopicLib.getMathtopics().get(Integer.parseInt(rawMessage) - 1);
                         addReaction(topic);
                         currentTopic = topic;
                         topic.run();

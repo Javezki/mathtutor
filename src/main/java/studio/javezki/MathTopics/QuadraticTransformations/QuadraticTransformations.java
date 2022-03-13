@@ -1,4 +1,4 @@
-package studio.javezki.MathTopics;
+package studio.javezki.MathTopics.QuadraticTransformations;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import studio.javezki.MathMain;
 import studio.javezki.Commands.Start;
+import studio.javezki.MathTopics.MathTopics;
 
 public class QuadraticTransformations extends MathTopics {
 
@@ -29,7 +30,7 @@ public class QuadraticTransformations extends MathTopics {
 
     private boolean xFlip = false;
 
-    private boolean yFlip;
+    private boolean yFlip = false;
 
     private int count = 0;
 
@@ -50,6 +51,12 @@ public class QuadraticTransformations extends MathTopics {
 
         generateNumbers();
 
+        runType();
+
+        startTransformations();
+    }
+
+    private void runType() {
         if (type == 0)
             straightLine();
 
@@ -64,8 +71,6 @@ public class QuadraticTransformations extends MathTopics {
 
         else if (type == 4)
             absolute();
-
-        startTransformations();
     }
 
     @Override
